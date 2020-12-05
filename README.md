@@ -1,4 +1,4 @@
-# gRPC and Spring Boot Benchmarking
+# Spring Boot and gRPC Benchmarking
 
 
 
@@ -29,7 +29,8 @@ For `/rest/` calls uses `sample-springboot-server` as the server and for `/grpc/
 
 
 
-> This project has `sample-grpc-codegen` imported as dependency in its `pom.xml`.
+> This project has `sample-grpc-codegen` as dependency in its `pom.xml`.
+
 
 
 
@@ -43,6 +44,7 @@ Just generates N random numbers and **does not return anything**.
 
 
 
+
 ## sample-grpc-server
 
 **Port:** 3000
@@ -53,7 +55,8 @@ Just like `sample-springboot-server`,  this server generates N random numbers an
 
 
 
-> This project has `sample-grpc-codegen` imported as dependency in its `pom.xml`.
+> This project has `sample-grpc-codegen` as dependency in its `pom.xml`.
+
 
 
 
@@ -68,6 +71,7 @@ The sole purpose of this project is to generate the code based on the given Prot
 For this project, there's a `Sample.proto` file located under `/src/proto/`. 
 
 With the help of plugins, whenever the project is compiled and installed, it generates the required code (hence we call it ***codegen***) under `/targets/generated-sources` folder.
+
 
 
 
