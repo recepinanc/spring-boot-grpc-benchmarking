@@ -15,7 +15,7 @@ This is a demo project that shows how to use gRPC and Spring Boot in their most 
 
 
 
-![sample_grpc_project_architecture](/Users/recep.inanc/playground/grpc/sample/spring-boot-grpc-benchmarking/sample_grpc_project_architecture.png)
+![sample_grpc_project_architecture](https://github.com/recepinanc/spring-boot-grpc-benchmarking/blob/main/sample_grpc_project_architecture.png)
 
 
 
