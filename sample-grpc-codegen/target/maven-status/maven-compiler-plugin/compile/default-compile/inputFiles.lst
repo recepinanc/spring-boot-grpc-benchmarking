@@ -1,0 +1,6 @@
+/Users/recep.inanc/playground/grpc/sample-grpc-codegen/target/generated-sources/protobuf/java/com/recepinanc/samplegrpcserver/sample/SampleProto.java
+/Users/recep.inanc/playground/grpc/sample-grpc-codegen/target/generated-sources/protobuf/java/com/recepinanc/samplegrpcserver/sample/SampleRequest.java
+/Users/recep.inanc/playground/grpc/sample-grpc-codegen/target/generated-sources/protobuf/grpc-java/com/recepinanc/samplegrpcserver/sample/SampleGrpc.java
+/Users/recep.inanc/playground/grpc/sample-grpc-codegen/target/generated-sources/protobuf/java/com/recepinanc/samplegrpcserver/sample/SampleResponseOrBuilder.java
+/Users/recep.inanc/playground/grpc/sample-grpc-codegen/target/generated-sources/protobuf/java/com/recepinanc/samplegrpcserver/sample/SampleResponse.java
+/Users/recep.inanc/playground/grpc/sample-grpc-codegen/target/generated-sources/protobuf/java/com/recepinanc/samplegrpcserver/sample/SampleRequestOrBuilder.java
