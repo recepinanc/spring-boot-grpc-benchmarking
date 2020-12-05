@@ -8,14 +8,7 @@ This is a demo project that shows how to use gRPC and Spring Boot in their most 
 
 - [ ]  Do benchmarking, share results
 
-- [ ] Add "How to run?"
-
-  
-
-# How to Run?
-
-
-
+- [ ] Add "How to run?" before Structure
 
 
 # Structure
