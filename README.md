@@ -7,7 +7,7 @@ This is a demo project that shows how to use gRPC and Spring Boot in their most 
 
 
 
-# What I learned?
+# 📝 What I learned?
 
 
 
@@ -21,12 +21,12 @@ This is a demo project that shows how to use gRPC and Spring Boot in their most 
 
 ✏️ Integrate **REST APIs** with **Protocol Buffers**.
 
-✏️ Do **benchmarking** with **JMeter**.
+✏️ Do **benchmarking** with **JMeter**.  
 
 
 
 
-# Project Structures
+# 🛠Project Structures
 
 
 
@@ -127,7 +127,7 @@ With the help of plugins, whenever the project is compiled and installed, it gen
 
   
 
-# Benchmarking
+# ⏱Benchmarking
 
 
 
@@ -183,6 +183,8 @@ This way I can **focus only on the performance aspect of both gRPC and REST appr
 
 ### Test Scenarios
 
+
+
 #### SetUp Thread Group
 
 SetUp Thread Group's main purpose is to trigger all endpoints individually to generate the data that other test scenarios are going to ask for and let the servers cache the responses before they are asked.
@@ -203,7 +205,7 @@ SetUp Thread Group's main purpose is to trigger all endpoints individually to ge
 
 
 
-## Results
+## 📊Results
 
 ![collage](https://github.com/recepinanc/spring-boot-grpc-benchmarking/blob/main/benchmarking/response-time-graphs/collage.png)
 
@@ -220,7 +222,9 @@ It is clear with higher amounts of data that **gRPC and Protobuff** really out-p
 
 
 
-# References
+# 📒References
+
+
 
 https://grpc.io/
 
