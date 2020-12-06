@@ -1,5 +1,6 @@
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import sample.LargeObjectServiceImpl;
 import sample.SampleServiceImpl;
 
 public class Application
@@ -8,6 +9,7 @@ public class Application
     {
         Server server = ServerBuilder.forPort(3000)
                 .addService(new SampleServiceImpl())
+                .addService(new LargeObjectServiceImpl())
                 .build();
 
         server.start();
