@@ -17,8 +17,6 @@ public class SampleServiceImpl extends SampleGrpc.SampleImplBase
     @Override
     public void randomNumber(SampleRequest request, StreamObserver<SampleResponse> responseObserver)
     {
-        System.out.println(request);
-
         int count = request.getCount();
 
         List<Integer> randomNumbers = getRandomNumbers(count);
@@ -28,13 +26,17 @@ public class SampleServiceImpl extends SampleGrpc.SampleImplBase
                 .build();
 
         responseObserver.onNext(response);
-
         responseObserver.onCompleted();
     }
 
-    private List<Integer> getRandomNumbers(int count)
+    public List<Integer> getRandomNumbers(int count)
     {
-        List<Integer> randomNumbers = new ArrayList<Integer>();
+        return generateRandomNumbers(count);
+    }
+
+    private List<Integer> generateRandomNumbers(int count)
+    {
+        List<Integer> randomNumbers = new ArrayList<>();
         for (int i = 0; i < count; i++)
         {
             randomNumbers.add(RANDOM_GENERATOR.nextInt(10) + 1);

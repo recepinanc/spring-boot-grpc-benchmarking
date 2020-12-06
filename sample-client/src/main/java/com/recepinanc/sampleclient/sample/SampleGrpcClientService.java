@@ -2,5 +2,7 @@ package com.recepinanc.sampleclient.sample;
 
 public interface SampleGrpcClientService
 {
-    void randomNumbers(int count);
+    void getRandomNumbers(int count);
+
+    void getLargeObjects(int count);
 }

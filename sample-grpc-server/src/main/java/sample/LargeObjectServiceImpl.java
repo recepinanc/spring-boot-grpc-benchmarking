@@ -1,12 +1,9 @@
-package com.recepinanc.samplespringbootserver.sample;
+package sample;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-
-import org.springframework.stereotype.Service;
 
 import com.recepinanc.samplegrpcserver.sample.Field36;
 import com.recepinanc.samplegrpcserver.sample.Field37;
@@ -17,22 +14,31 @@ import com.recepinanc.samplegrpcserver.sample.Field83;
 import com.recepinanc.samplegrpcserver.sample.Field84;
 import com.recepinanc.samplegrpcserver.sample.Field85;
 import com.recepinanc.samplegrpcserver.sample.LargeObject;
-import com.recepinanc.samplespringbootserver.pojo.LargeObjectPOJO;
+import com.recepinanc.samplegrpcserver.sample.LargeObjectRequest;
+import com.recepinanc.samplegrpcserver.sample.LargeObjectResponse;
+import com.recepinanc.samplegrpcserver.sample.LargeObjectServiceGrpc;
 
-@Service
-public class SampleServiceImpl implements SampleService
+import io.grpc.stub.StreamObserver;
+
+public class LargeObjectServiceImpl extends LargeObjectServiceGrpc.LargeObjectServiceImplBase
 {
     private static final Map<Integer, List<LargeObject>> LARGE_OBJECT_CACHE = new HashMap<>();
-    private static final Map<Integer, List<LargeObjectPOJO>> LARGE_OBJECT_AS_JSON_CACHE = new HashMap<>();
-    private static final Random RANDOM_GENERATOR = new Random();
 
     @Override
-    public List<Integer> getRandomNumbers(int count)
+    public void getLargeObjects(LargeObjectRequest request, StreamObserver<LargeObjectResponse> responseObserver)
     {
-        return generateRandomNumbers(count);
+        int count = request.getCount();
+
+        List<LargeObject> largeObjects = getLargeObjects(count);
+
+        LargeObjectResponse response = LargeObjectResponse.newBuilder()
+                .addAllLargeObjects(largeObjects)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
-    @Override
     public List<LargeObject> getLargeObjects(int count)
     {
         if (!LARGE_OBJECT_CACHE.containsKey(count))
@@ -44,28 +50,6 @@ public class SampleServiceImpl implements SampleService
         return LARGE_OBJECT_CACHE.get(count);
     }
 
-    @Override
-    public List<LargeObjectPOJO> getLargeObjectPOJOs(int count)
-    {
-        if (!LARGE_OBJECT_AS_JSON_CACHE.containsKey(count))
-        {
-            List<LargeObjectPOJO> largeObjectPOJOS = generateLargeObjectPOJOs(count);
-            LARGE_OBJECT_AS_JSON_CACHE.put(count, largeObjectPOJOS);
-        }
-
-        return LARGE_OBJECT_AS_JSON_CACHE.get(count);
-    }
-
-    private List<Integer> generateRandomNumbers(int count)
-    {
-        List<Integer> randomNumbers = new ArrayList<>();
-        for (int i = 0; i < count; i++)
-        {
-            randomNumbers.add(RANDOM_GENERATOR.nextInt(10) + 1);
-        }
-        return randomNumbers;
-    }
-
     private List<LargeObject> generateLargeObjects(int count)
     {
         List<LargeObject> largeObjects = new ArrayList<>();
@@ -75,17 +59,6 @@ public class SampleServiceImpl implements SampleService
             largeObjects.add(generateLargeObject());
         }
         return largeObjects;
-    }
-
-    private List<LargeObjectPOJO> generateLargeObjectPOJOs(int count)
-    {
-        List<LargeObjectPOJO> largeObjectPOJOS = new ArrayList<>();
-
-        for (int i = 0; i < count; i++)
-        {
-            largeObjectPOJOS.add(generateLargeObjectPOJO());
-        }
-        return largeObjectPOJOS;
     }
 
     private LargeObject generateLargeObject()
@@ -177,89 +150,6 @@ public class SampleServiceImpl implements SampleService
                 .addAllField84(generateField84s())
                 .addAllField85(generateField85s())
                 .build();
-    }
-
-    private LargeObjectPOJO generateLargeObjectPOJO()
-    {
-        LargeObjectPOJO largeObjectPOJO = new LargeObjectPOJO();
-        largeObjectPOJO.setField1(1L);
-        largeObjectPOJO.setField2(1L);
-        largeObjectPOJO.setField3(1L);
-        largeObjectPOJO.setField4(1);
-        largeObjectPOJO.setField7("S1");
-        largeObjectPOJO.setField8("S1");
-        largeObjectPOJO.setField9(1);
-        largeObjectPOJO.setField10(1L);
-        largeObjectPOJO.setField11(1L);
-        largeObjectPOJO.setField12(1L);
-        largeObjectPOJO.setField13(1L);
-        largeObjectPOJO.setField14(1L);
-        largeObjectPOJO.setField15(1L);
-        largeObjectPOJO.setField16(1L);
-        largeObjectPOJO.setField17(1L);
-        largeObjectPOJO.setField18(1L);
-        largeObjectPOJO.setField19(1);
-        largeObjectPOJO.setField20("S1");
-        largeObjectPOJO.setField21("S1");
-        largeObjectPOJO.setField22(1);
-        largeObjectPOJO.setField23(1L);
-        largeObjectPOJO.setField24(1L);
-        largeObjectPOJO.setField25(1L);
-        largeObjectPOJO.setField26(1L);
-        largeObjectPOJO.setField27(1L);
-        largeObjectPOJO.setField28(1L);
-        largeObjectPOJO.setField29(1L);
-        largeObjectPOJO.setField30(false);
-        largeObjectPOJO.setField31(false);
-        largeObjectPOJO.setField32(false);
-        largeObjectPOJO.setField33(false);
-        largeObjectPOJO.setField34(false);
-        largeObjectPOJO.setField35(false);
-        largeObjectPOJO.setField38(1);
-        largeObjectPOJO.setField39(1);
-        largeObjectPOJO.setField40(1);
-        largeObjectPOJO.setField41(1);
-        largeObjectPOJO.setField42("S1");
-        largeObjectPOJO.setField43(1);
-        largeObjectPOJO.setField44("S1");
-        largeObjectPOJO.setField45(1);
-        largeObjectPOJO.setField46(1);
-        largeObjectPOJO.setField47("S1");
-        largeObjectPOJO.setField48(1);
-        largeObjectPOJO.setField49("S1");
-        largeObjectPOJO.setField50(1);
-        largeObjectPOJO.setField51("S1");
-        largeObjectPOJO.setField52(1);
-        largeObjectPOJO.setField53(false);
-        largeObjectPOJO.setField55(1L);
-        largeObjectPOJO.setField56(1);
-        largeObjectPOJO.setField57("S1");
-        largeObjectPOJO.setField58("S1");
-        largeObjectPOJO.setField59(1);
-        largeObjectPOJO.setField60(1);
-        largeObjectPOJO.setField61("S1");
-        largeObjectPOJO.setField62("S1");
-        largeObjectPOJO.setField63("S1");
-        largeObjectPOJO.setField64(1);
-        largeObjectPOJO.setField65(false);
-        largeObjectPOJO.setField66(false);
-        largeObjectPOJO.setField67("S1");
-        largeObjectPOJO.setField68("S1");
-        largeObjectPOJO.setField69("S1");
-        largeObjectPOJO.setField70("S1");
-        largeObjectPOJO.setField71("S1");
-        largeObjectPOJO.setField72("S1");
-        largeObjectPOJO.setField73(false);
-        largeObjectPOJO.setField74(1L);
-        largeObjectPOJO.setField75(1L);
-        largeObjectPOJO.setField76(1L);
-        largeObjectPOJO.setField77(1L);
-        largeObjectPOJO.setField78(1L);
-        largeObjectPOJO.setField79(1L);
-        largeObjectPOJO.setField80(1L);
-        largeObjectPOJO.setField81(1L);
-        largeObjectPOJO.setField82(1L);
-        return largeObjectPOJO;
     }
 
     private List<Field83> generateField83s()

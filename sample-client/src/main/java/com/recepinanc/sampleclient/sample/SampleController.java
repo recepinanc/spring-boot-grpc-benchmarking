@@ -17,15 +17,33 @@ public class SampleController
         this.sampleGrpcClientService = sampleGrpcClientService;
     }
 
-    @RequestMapping("/rest/randomNumber")
+    @RequestMapping("/rest/randomNumbers")
     public void restRandomNumber(@RequestParam("count") int count)
     {
-        sampleRestClientService.randomNumbers(count);
+        sampleRestClientService.getRandomNumbers(count);
     }
 
-    @RequestMapping("/grpc/randomNumber")
+    @RequestMapping(value = "/rest/largeObjects/json")
+    public void restLargeObjectsJson(@RequestParam("count") int count)
+    {
+        sampleRestClientService.getLargeObjectsJson(count);
+    }
+
+    @RequestMapping(value = "/rest/largeObjects")
+    public void restLargeObjects(@RequestParam("count") int count)
+    {
+        sampleRestClientService.getLargeObjects(count);
+    }
+
+    @RequestMapping("/grpc/randomNumbers")
     public void grpcRandomNumber(@RequestParam("count") int count)
     {
-        sampleGrpcClientService.randomNumbers(count);
+        sampleGrpcClientService.getRandomNumbers(count);
+    }
+
+    @RequestMapping("/grpc/largeObjects")
+    public void grpcLargeObjects(@RequestParam("count") int count)
+    {
+        sampleGrpcClientService.getLargeObjects(count);
     }
 }
