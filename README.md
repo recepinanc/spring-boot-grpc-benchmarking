@@ -7,6 +7,25 @@ This is a demo project that shows how to use gRPC and Spring Boot in their most 
 
 
 
+# What I learned?
+
+
+
+✏️ Differences **between gRPC and REST**.
+
+✏️ Theory behind **gRPC** and **Protocol Buffer**.
+
+✏️ Setup a simple **gRPC** **Server** and **Client**.
+
+✏️ Make use of **protobuff** for **code generation**.
+
+✏️ Integrate **REST APIs** with **Protocol Buffers**.
+
+✏️ Do **benchmarking** with **JMeter**.
+
+
+
+
 # Project Structures
 
 
@@ -201,19 +220,20 @@ It is clear with higher amounts of data that **gRPC and Protobuff** really out-p
 
 
 
+# References
 
-# What I learned?
+https://grpc.io/
 
+https://cloud.google.com/apis/design/resources
 
+https://cloud.google.com/blog/products/api-management/understanding-grpc-openapi-and-rest-and-when-to-use-them
 
-✏️ Differences **between gRPC and REST**.
+https://pages.apigee.com/web-api-design-register.html
 
-✏️ Theory behind **gRPC** and **Protocol Buffer**.
+https://medium.com/apis-and-digital-transformation/openapi-and-grpc-side-by-side-b6afb08f75ed
 
-✏️ Setup a simple **gRPC** **Server** and **Client**.
+https://dev.to/techschoolguru/http-2-the-secret-weapon-of-grpc-32dk
 
-✏️ Make use of **protobuff** for **code generation**.
+https://www.kabisa.nl/tech/sending-data-to-the-other-side-of-the-world-json-protocol-buffers-rest-grpc/
 
-✏️ Integrate **REST APIs** with **Protocol Buffers**.
-
-✏️ Do **benchmarking** with **JMeter**.
+https://blog.j-labs.pl/grpc-in-java
