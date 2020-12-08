@@ -32,9 +32,8 @@ Because this experiment is conducted on my local machine, I accept that it just 
 A Spring Boot project that accepts JSON and Protocol Buffer responses.  
 
 
-
 **Port:** 5000
-
+<br/>
 **Endpoints**
 
 ```
@@ -58,8 +57,9 @@ A Spring Boot project that accepts JSON and Protocol Buffer responses.
 ## sample-springboot-server
 <br/>
 A basic Spring Boot project.
-<br/>
+
 **Port:** 4000
+<br/>
 **Endpoints**
 
 ```
@@ -71,8 +71,9 @@ A basic Spring Boot project.
 ## sample-grpc-server
 <br/>
 A basic gRPC Server.
-<br/>
+
 **Port:** 3000
+<br/>
 **Endpoints**
 
 ```
@@ -94,9 +95,13 @@ With the help of plugins, whenever the project is compiled and installed, it gen
 <br/><br/>
 # ⏱ Benchmarking
 <br/>
+
 This benchmarking compares the **performances** of **"gRPC with Protocol Buffers"** against **"REST with JSON"** during **data transportation**.
+
 <br/><br/>
+
 ## Motivation
+
 <br/>
 As we are all witnessing the world moving towards the microservices architecture, gRPC's popularity is on the rise. It is mainly because it is said to be more performant than REST and its drawbacks are somewhat negligible if we are planning to use it to design our internal APIs.
 
@@ -159,11 +164,19 @@ It is clear with higher amounts of data that **gRPC and Protobuff** really out-p
 # 📒References
 <br/>
 GRPC Official Website: https://grpc.io/
+
 API Design: https://cloud.google.com/apis/design/resources
+
 gRPC vs OpenAPI vs Rest APIs: https://cloud.google.com/blog/products/api-management/understanding-grpc-openapi-and-rest-and-when-to-use-them
+
 Web API Design Guidelines: https://pages.apigee.com/web-api-design-register.html
+
 gRPC vs OpenAPI: https://medium.com/apis-and-digital-transformation/openapi-and-grpc-side-by-side-b6afb08f75ed
+
 HTTP/2's effect on gRPC: https://dev.to/techschoolguru/http-2-the-secret-weapon-of-grpc-32dk
+
 Great example on how to use gRPC/Protobuf/JSON: https://www.kabisa.nl/tech/sending-data-to-the-other-side-of-the-world-json-protocol-buffers-rest-grpc/
+
 gRPC in Java: https://blog.j-labs.pl/grpc-in-java
+
 Slack API - Great example of an RPC API Design: https://api.slack.com/methods#conversations
