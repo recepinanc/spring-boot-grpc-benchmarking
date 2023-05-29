@@ -160,6 +160,12 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# IDEA
+.idea
+
+# Others
+.gitignore
+.DS_Store
 
 # End of https://www.gitignore.io/api/git,java,maven,eclipse,windows
 

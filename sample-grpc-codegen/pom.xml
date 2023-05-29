@@ -12,7 +12,7 @@
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <grpc.version>1.33.0</grpc.version>
+        <grpc.version>1.53.0</grpc.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
@@ -39,7 +39,21 @@
             <version>1.2</version>
         </dependency>
     </dependencies>
-    
+
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--            <id>mac</id>-->
+<!--            <activation>-->
+<!--                <os>-->
+<!--                    <family>mac</family>-->
+<!--                </os>-->
+<!--            </activation>-->
+<!--            <properties>-->
+<!--                <os.detected.classifier>osx-x86_64</os.detected.classifier>-->
+<!--            </properties>-->
+<!--        </profile>-->
+<!--    </profiles>-->
+
     <build>
         <extensions>
             <extension>
