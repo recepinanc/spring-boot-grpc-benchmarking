@@ -22,7 +22,7 @@ tmp/
 *.bak
 *.swp
 *~.nib
-local.properties
+benchmarking/custom.properties
 .settings/
 .loadpath
 .recommenders
