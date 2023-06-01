@@ -1,2 +1,0 @@
-timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
-1685575182312,535,PROTO - Large Object - 100000,200,,PROTO - Large Object - Very Large Input (100000) 4-1,,true,,121,146,1,1,http://localhost:5000/rest/largeObjects?count=100000,535,0,1

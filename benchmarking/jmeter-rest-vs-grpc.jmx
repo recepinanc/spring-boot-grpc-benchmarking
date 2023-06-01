@@ -7,19 +7,39 @@
       <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments">
-          <elementProp name="targetDomain" elementType="Argument">
-            <stringProp name="Argument.name">targetDomain</stringProp>
-            <stringProp name="Argument.value">${__P(targetDomain, localhost)}</stringProp>
+          <elementProp name="SERVER" elementType="Argument">
+            <stringProp name="Argument.name">SERVER</stringProp>
+            <stringProp name="Argument.value">${__P(SERVER)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="resultsDir" elementType="Argument">
-            <stringProp name="Argument.name">resultsDir</stringProp>
-            <stringProp name="Argument.value">${__P(resultsDir, test_results)}</stringProp>
+          <elementProp name="PORT" elementType="Argument">
+            <stringProp name="Argument.name">PORT</stringProp>
+            <stringProp name="Argument.value">${__P(PORT)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
-          <elementProp name="subResultsDir" elementType="Argument">
-            <stringProp name="Argument.name">subResultsDir</stringProp>
-            <stringProp name="Argument.value">${__P(subResultsDir, test_results/sub)}</stringProp>
+          <elementProp name="NUM_OF_THREADS" elementType="Argument">
+            <stringProp name="Argument.name">NUM_OF_THREADS</stringProp>
+            <stringProp name="Argument.value">${__P(NUM_OF_THREADS)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="RAMP_UP_PERIOD" elementType="Argument">
+            <stringProp name="Argument.name">RAMP_UP_PERIOD</stringProp>
+            <stringProp name="Argument.value">${__P(RAMP_UP_PERIOD)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="LOOP_COUNT" elementType="Argument">
+            <stringProp name="Argument.name">LOOP_COUNT</stringProp>
+            <stringProp name="Argument.value">${__P(LOOP_COUNT)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="RESULTS_DIR" elementType="Argument">
+            <stringProp name="Argument.name">RESULTS_DIR</stringProp>
+            <stringProp name="Argument.value">${__P(RESULTS_DIR)}/${__P(LOOP_COUNT)}-loops</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SUB_RESULTS_DIR" elementType="Argument">
+            <stringProp name="Argument.name">SUB_RESULTS_DIR</stringProp>
+            <stringProp name="Argument.value">${__P(RESULTS_DIR)}/${__P(LOOP_COUNT)}-loops/sub</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -31,10 +51,10 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">${LOOP_COUNT}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">100</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP_UP_PERIOD}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -75,7 +95,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">${subResultsDir}/proto-1-result.csv</stringProp>
+          <stringProp name="filename">${SUB_RESULTS_DIR}/proto-1-result.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
@@ -166,8 +186,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects</stringProp>
@@ -224,10 +244,10 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">${LOOP_COUNT}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">100</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP_UP_PERIOD}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -268,7 +288,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">${subResultsDir}/proto-100-results.csv</stringProp>
+          <stringProp name="filename">${SUB_RESULTS_DIR}/proto-100-results.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
@@ -359,8 +379,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects</stringProp>
@@ -417,10 +437,10 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">${LOOP_COUNT}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">100</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP_UP_PERIOD}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -461,7 +481,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">${subResultsDir}/proto-1000-results.csv</stringProp>
+          <stringProp name="filename">${SUB_RESULTS_DIR}/proto-1000-results.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
@@ -552,8 +572,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects</stringProp>
@@ -610,10 +630,10 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">${LOOP_COUNT}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP_UP_PERIOD}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -654,7 +674,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">${subResultsDir}/proto-100000-results.csv</stringProp>
+          <stringProp name="filename">${SUB_RESULTS_DIR}/proto-100000-results.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
@@ -745,8 +765,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects</stringProp>
@@ -803,10 +823,10 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">${LOOP_COUNT}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">100</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP_UP_PERIOD}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -847,7 +867,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">${subResultsDir}/rest-1-results.csv</stringProp>
+          <stringProp name="filename">${SUB_RESULTS_DIR}/rest-1-results.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
@@ -938,8 +958,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects/json</stringProp>
@@ -996,10 +1016,10 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">${LOOP_COUNT}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">100</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP_UP_PERIOD}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -1040,7 +1060,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">${subResultsDir}/rest-100-results.csv</stringProp>
+          <stringProp name="filename">${SUB_RESULTS_DIR}/rest-100-results.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
@@ -1131,8 +1151,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects/json</stringProp>
@@ -1189,10 +1209,10 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">${LOOP_COUNT}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">100</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP_UP_PERIOD}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -1233,7 +1253,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">${subResultsDir}/rest-1000-results.csv</stringProp>
+          <stringProp name="filename">${SUB_RESULTS_DIR}/rest-1000-results.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
@@ -1324,8 +1344,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects/json</stringProp>
@@ -1382,10 +1402,10 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">${LOOP_COUNT}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP_UP_PERIOD}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -1426,7 +1446,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">${subResultsDir}/rest-100000-results.csv</stringProp>
+          <stringProp name="filename">${SUB_RESULTS_DIR}/rest-100000-results.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
@@ -1517,8 +1537,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects/json</stringProp>
@@ -1575,10 +1595,10 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">${LOOP_COUNT}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">100</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP_UP_PERIOD}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -1619,7 +1639,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">${subResultsDir}/grpc-1-results.csv</stringProp>
+          <stringProp name="filename">${SUB_RESULTS_DIR}/grpc-1-results.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
@@ -1710,8 +1730,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/grpc/largeObjects/</stringProp>
@@ -1768,10 +1788,10 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">${LOOP_COUNT}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">100</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP_UP_PERIOD}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -1812,7 +1832,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">${subResultsDir}/grpc-100-results.csv</stringProp>
+          <stringProp name="filename">${SUB_RESULTS_DIR}/grpc-100-results.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
@@ -1903,8 +1923,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/grpc/largeObjects/</stringProp>
@@ -1961,10 +1981,10 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">${LOOP_COUNT}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">100</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP_UP_PERIOD}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -2005,7 +2025,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">${subResultsDir}/grpc-1000-results.csv</stringProp>
+          <stringProp name="filename">${SUB_RESULTS_DIR}/grpc-1000-results.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
@@ -2096,8 +2116,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/grpc/largeObjects/</stringProp>
@@ -2154,10 +2174,10 @@
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
+          <stringProp name="LoopController.loops">${LOOP_COUNT}</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${NUM_OF_THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP_UP_PERIOD}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"></stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -2198,7 +2218,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">${subResultsDir}/grpc-100000-results.csv</stringProp>
+          <stringProp name="filename">${SUB_RESULTS_DIR}/grpc-100000-results.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="Graph Results" enabled="true">
@@ -2289,8 +2309,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/grpc/largeObjects/</stringProp>
@@ -2332,8 +2352,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/grpc/largeObjects/</stringProp>
@@ -2360,8 +2380,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/grpc/largeObjects/</stringProp>
@@ -2388,8 +2408,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/grpc/largeObjects/</stringProp>
@@ -2416,8 +2436,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/grpc/largeObjects/</stringProp>
@@ -2444,8 +2464,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects</stringProp>
@@ -2472,8 +2492,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects</stringProp>
@@ -2500,8 +2520,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects</stringProp>
@@ -2528,8 +2548,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects</stringProp>
@@ -2556,8 +2576,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects/json</stringProp>
@@ -2584,8 +2604,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects/json</stringProp>
@@ -2612,8 +2632,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects/json</stringProp>
@@ -2640,8 +2660,8 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${targetDomain}</stringProp>
-          <stringProp name="HTTPSampler.port">5000</stringProp>
+          <stringProp name="HTTPSampler.domain">${SERVER}</stringProp>
+          <stringProp name="HTTPSampler.port">${PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/rest/largeObjects/json</stringProp>
@@ -2766,7 +2786,7 @@
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">${resultsDir}/results.csv</stringProp>
+        <stringProp name="filename">${RESULTS_DIR}/results.csv</stringProp>
       </ResultCollector>
       <hashTree/>
       <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
