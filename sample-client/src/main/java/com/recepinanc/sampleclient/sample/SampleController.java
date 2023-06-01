@@ -46,4 +46,7 @@ public class SampleController
     {
         sampleGrpcClientService.getLargeObjects(count);
     }
+
+    @RequestMapping("/testing")
+    public int testConnection() { return 100; }
 }
